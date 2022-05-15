@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cartas para Julieta</title>
+
+    
+
+    <link rel="icon" href="./assets/icon/favicon.ico">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+   
+    <script src="./js/funcoes.js"></script>
+</head>
+
+<body>
+    <div class="header"></div>
+
+        <div class="container">
+            <ul class="navbar">
+                <li><a href="index.html"> Inicial</li>
+                <li><a href="login.html">Login</a></li>
+                <li class="agora">Cadastro</li>
+            </ul>
+            
+    </div>
+
+    <div class="banner">
+        <div class="container_cadastro">
+            <div class="foto_cadastro"></div>
+            <div class="box">
+                <span class="span_cadastro">Cadastre-se</span><br><br>
+                <input id="nome_input" class="input_nome" placeholder="Nome"><br>
+                <input id="email_input" class="input_email" type="email" placeholder="E-mail"><br>
+                <input id="senha_input" class="input_senha" type="password" placeholder="********"><br>
+                <button onclick="cadastrar()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>   
+   <!--footer inicio-->
+   <div class="footer">
+    <div class="container">
+        <h4>São Paulo- SP- SPTech &copy;2022 </h4>
+    </div>
+</div>
+<!--footer fim-->
+  
+</body>
+
+</html>
+
+<script>
+    function cadastrar() {
+
+        var nomeVar = nome_input.value
+        var emailVar = email_input.value
+        var senhaVar = senha_input.value
+   
+
+        if (nomeVar == ""){
+        nome_input.style.borderColor = 'red'
+        nome_input.style.borderStyle = 'solid'
+        nome_input.style.borderWidth = '5px'
+
+            
+            return false;
+        } 
+        else if (emailVar.indexOf("@")==-1){
+        email_input.style.borderColor = 'red'
+        email_input.style.borderStyle = 'solid'
+        email_input.style.borderWidth = '5px'
+
+            return false;
+        } 
+        else if (senhaVar.lenght < 8){
+        senha_input.style.borderColor = 'red'
+        senha_input.style.borderStyle = 'solid'
+        senha_input.style.borderWidth = '5px'
+
+            return false;
+        }
+        else {
+            alert ("Cadastro realizado com sucesso!")
+        }
+
+        
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                
+                nomeServer : nomeVar,
+                emailServer : emailVar,
+                senhaServer : senhaVar
+
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block";
+
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "2000")
+                
+                
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            
+        });
+
+        return false;
+    }
+    
+    
+
+</script>
