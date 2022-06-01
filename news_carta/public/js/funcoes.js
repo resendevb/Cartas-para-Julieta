@@ -5,6 +5,13 @@ function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
 
+    var fk_lugar = sessionStorage.FK_LUGAR;
+    
+
+    var fk_lugar = document.getElementById('grafico1');
+
+    select_input.value = fk_lugar;
+
     var h1LoginUsuario = document.getElementById("h1_login_usuario");
 
     if (email != null && nome != null) {
@@ -54,4 +61,8 @@ function fecharModal() {
     var divModal = document.getElementById("div_modal");
     divModal.style.display = "none";
 }
+
+
+
+
 

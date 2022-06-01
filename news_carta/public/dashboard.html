@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cartas para Julieta</title>
+
+    
+
+    <link rel="icon" href="./assets/icon/favicon.ico">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <script src="./js/funcoes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="contar_lugares"></script>
+</head>
+
+<body>
+    <div class="header"></div>
+
+        <div class="container">
+            <ul class="navbar">
+                
+                
+                <li><a href="../public/index.html">Inicial</li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li class="agora">Gráficos</li>  
+                </ul>
+    </div>
+    <li class="seta"><a href="../public/paginaDoUsuario.html">
+        <img src="css/seta-para-a-esquerda.png"></a></li>
+    
+    <div class="banner">
+        <div class="container">
+        
+            <div class="div_chart1">
+                Lugares viajados
+              <canvas id="grafico1" class="grafico_1"></canvas>
+            </div>
+            <div class="div_chart2">
+              Sobre o filme
+              <canvas id="grafico2" class="grafico_2" ></canvas>
+            </div>
+                 
+            </div>
+            
+            
+
+                
+            </div>
+        </div>
+    
+
+
+<br> 
+<br>
+<br>
+<br>
+<br>
+
+    <!--footer inicio-->
+    <div class="footer">
+        <div class="container">
+            <h4>São Paulo- SP- SPTech &copy;2022 </h4>
+        </div>
+    </div>
+    <!--footer fim-->
+</body>
+
+</html>
+<script>
+    function voltar(){
+        window.location="paginaDoUsuario.html";
+    }
+     
+  function criar_dash(){
+
+    var fk_lugar = sessionStorage.FK_LUGAR
+
+
+const labels = [
+      'Verona',
+      'Toscana',
+    ];
+
+    
+    const data = {
+    
+      labels: labels,
+      datasets: {
+        label: 'Verona',
+        backgroundColor: '#F0E68C',
+        borderColor: '#F0E68C',
+        data: [2,3],
+      }, 
+    
+
+      
+        label: 'Toscana',
+        backgroundColor: '#98FB98',
+        borderColor: '#98FB98',
+        data: [2,5],
+      }
+    
+    
+
+   
+    const config = {
+      type: 'line',
+      data:data,
+      options: {}
+    };
+
+
+    const labels2 = [
+      'Like',
+      'Dislike',
+     
+    ];
+  
+    const data2 = {
+      labels: labels2,
+      datasets: [{
+        label: 'Like',
+        backgroundColor: '#F0E68C',
+        borderColor: '#F0E68C',
+        data: [],
+      },
+
+      {
+        label: 'Dislike',
+        backgroundColor: '#98FB98',
+        borderColor: '#98FB98',
+        data: [],
+      }
+    ]
+    }
+
+    
+    const config2 = {
+      type: 'line',
+      data:data2,
+      options: {}
+    };
+
+    const myChart = new Chart(
+      document.getElementById('grafico1'),
+      config
+    ); 
+
+    const myChart2 = new Chart(
+      document.getElementById('grafico2'),
+      config2
+    );
+  
+
+    fetch("/dashboard/criar_dash", {
+        method: "GET",
+        body: formulario
+    }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO criar_dash()!")
+
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+
+                sessionStorage.FK_LUGAR = json.lugar;
+                
+                
+
+                setTimeout(function () {
+                    window.location = "/index.html";
+                }, 1000);
+            });
+
+        } else {
+
+            console.log("Erro");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+                // limparFormulario();
+                finalizarAguardar(texto);
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+    return false;
+}
+</script>

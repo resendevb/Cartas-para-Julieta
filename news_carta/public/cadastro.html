@@ -37,6 +37,15 @@
                 <input id="nome_input" class="input_nome" placeholder="Nome"><br>
                 <input id="email_input" class="input_email" type="email" placeholder="E-mail"><br>
                 <input id="senha_input" class="input_senha" type="password" placeholder="********"><br>
+                
+                
+                Já conhece ou deseja conhecer 
+                <div class="lugares">
+                <select id="select_lugar">
+                    <option value="1">Verona</option>
+                    <option value="2">Toscana</option>
+                </select>
+                </div><br>
                 <button onclick="cadastrar()">Cadastrar</button>
             </div>
         </div>
@@ -58,12 +67,22 @@
 </html>
 
 <script>
+    // fazer a var toscana e verona serem iguais aos ids da tabela
+
+    var lista_lugar = []
+    var contadortotal = 0
+    var contadorverona = 0
+    var contadortoscana = 0
+
     function cadastrar() {
 
         var nomeVar = nome_input.value
         var emailVar = email_input.value
         var senhaVar = senha_input.value
-   
+
+        var lugarVar = select_lugar.value
+        
+        
 
         if (nomeVar == ""){
         nome_input.style.borderColor = 'red'
@@ -88,9 +107,11 @@
             return false;
         }
         else {
-            alert ("Cadastro realizado com sucesso!")
+            window.location = "login.html";
         }
 
+
+        
         
         fetch("/usuarios/cadastrar", {
             method: "POST",
@@ -101,7 +122,9 @@
                 
                 nomeServer : nomeVar,
                 emailServer : emailVar,
-                senhaServer : senhaVar
+                senhaServer : senhaVar,
+                lugarServer : lugarVar
+                
 
             })
         }).then(function (resposta) {

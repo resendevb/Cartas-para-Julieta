@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cartas para Julieta</title>
+
+    <script src="./js/funcoes.js"></script>
+
+    <link rel="icon" href="./assets/icon/favicon.ico">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <script src="./js/funcoes.js"></script>
+</head>
+
+<body>
+    <div class="header"></div>
+
+        <div class="container">
+            <ul class="navbar">
+                <li><a href="../public/index.html"> Inicial</li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="../public/dashboard.html">Gráficos</a></li>
+                
+            </ul>
+            
+        
+    </div>
+
+    <div class="banner">
+        <div class="container_perfil">
+
+           
+            <div class="ameis">
+               <h4> De 0 a 10, quanto
+                você gostou 
+                do filme?</h4>
+                <br><br>
+                <input id="input_amei" class="amei_input">
+                <br>
+                <button id="botao_like" onclick="like()">Like</button>
+            </div>
+
+            <div id="div_resultado" class="resposta"></div>
+            
+            </div>
+           
+        </div>
+       
+    
+
+
+<br> 
+<br>
+<br>
+<br>
+<br>
+
+    <!--footer inicio-->
+    <div class="footer">
+        <div class="container">
+            <h4>São Paulo- SP- SPTech &copy;2022 </h4>
+        </div>
+    </div>
+    <!--footer fim-->
+</body>
+</html>
+<script>
+
+    function like(){
+        var qtd_like = Number(input_amei.value)
+        lista_likes.push(qtd_like)
+
+
+        
+        for(var contador=1; contador<= qtd_like; contador++)
+        {div_resultado.innerHTML += `<b>Gostei desse filme</b><br>`}
+    }
+
+    
+</script>

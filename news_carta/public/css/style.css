@@ -11,6 +11,7 @@ body {
   width: 80%;
   margin: auto;
   display: flex;
+ 
 }
 
 .header {
@@ -34,10 +35,12 @@ body {
   width: 300px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   list-style: none;
   color: black;
   text-decoration: none;
+
+ 
   
 }
 
@@ -62,6 +65,7 @@ body {
   background-color: #F4EEA7;
   
 }
+
 
 .imagem_casa{
   width: 500px;
@@ -365,10 +369,21 @@ align-items: center;
   margin-top: 50px;
 }
 
+.container_login .box{
+  height: 300px;
+  width: 400px;
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
 /* FORMULARIO */
 
 .container_cadastro{
-  height: 500px;
+  height: 800px;
   width: 100%;
   background-color: #F4EEA7;
   display: flex;
@@ -392,8 +407,8 @@ align-items: center;
   margin-top: 50px;
 }
 
-.box{
-  height: 400px;
+.container_cadastro .box{
+  height: 500px;
   width: 400px;
   background-color: white;
   border-radius: 15px;
@@ -424,6 +439,17 @@ align-items: center;
   border-radius: 10px;
 }
 
+.lugares{
+  
+}
+
+.input_lugar{
+  height: 15px;
+  width: 15px;
+  background-color: #F4EEA7;
+  border-radius: 10px;
+}
+
 button {
   height: 30px;
   width: 100px;
@@ -437,111 +463,124 @@ button {
 
 /* PAGINA DOS GRÁFICOS */
 
-.janela {
-  display: flex;
-  width: 100vw;
+
+
+.seta{
+  margin-left: 1300px;
+  list-style: none;
+  
 }
 
-.header-left a {
-  text-decoration: none;
-  color: white;
-}
-
-.header-left {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  height: 100vh;
-  width: 25%;
+.banner .container .grafico1{
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  border-right: 3px solid #32b9cd;
-  background-color: #212124;
-  /* border: 3px solid pink; */
-}
-
-.dash-right {
-  display: flex;
-  width: 75%;
-  height: fit-content;
-  background-color: #161618;
   position: relative;
-  top: 0;
-  left: 25%;
+  height: 200px;
+   width: 100px;
 }
 
-.header-left h1 {
-  color: #32b9cd;
+.div_chart1{
+
+  height: 400px;
+  width: 600px;
+  background-color: white;
+  border-radius: 6px;
 }
 
-.hello {
+.div_chart2{
+  height: 400px;
+  width: 600px;
+  background-color: white;
+  border-radius: 6px;
+  
+}
+
+.banner .container .grafico2{
+  display: flex;
+  position: relative;
+  height: 200px;
+   width: 100px;
+}
+
+
+/* perfil do usuário */
+.container_perfil{
+  height: 500px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  background-image: url("https://media.tacdn.com/media/attractions-content--1x-1/0b/e2/b9/a5.jpg");
+
 }
 
-.hello h3 {
-  color: #e3b062;
-  font-weight: 300;
-  font-size: 1.2rem;
-}
 
-.hello h3 span {
-  font-weight: 800;
-}
-
-.btn-nav {
-  width: 40%;
-  color: white;
-  background-color: #e6005a;
-  border-radius: 5px;
-  text-align: center;
-  padding: 2% 5%;
-}
-
-.btn-nav-white {
-  width: 40%;
+.check_box{
+  height:300px;
+  width: 200px;
   background-color: white;
-  border: 3px solid #e6005a;
-  border-radius: 5px;
-  text-align: center;
-  padding: 2% 5%;
-}
-
-.btn-nav-white h3 {
-  color: #e6005a;
-  padding: 0;
-  margin: 0;
-}
-
-.btn-nav h3,
-.btn-logout h3 {
-  margin: 0;
-  padding: 0;
-}
-
-.btn-logout {
-  margin: 0;
-  padding: 0;
-  width: 20%;
-  background-color: #32b9cd;
-  color: white;
   border-radius: 10px;
-  text-align: center;
-  padding: 10px 15px;
-  margin-bottom: 100px;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px black solid;
 }
 
-/* pagina extra - simulador */
-.simulador {
-  color: white;
-
+.viagem_input{
+  height: 15px;
+  width: 15px;
+  background-color: #F4EEA7;
+  border-radius: 5px;
 }
 
-.simulador .container {
-  flex-direction: column
+.ameis{
+  height:300px;
+  width: 200px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px black solid;
+  
 }
+
+.amei_input{
+  height: 30px;
+  width: 50px;
+  background-color: #F4EEA7;
+  border-radius: 5px;
+  
+}
+
+.botao_like{
+  height: 30px;
+  width: 50px;
+  background-color: #F4EEA7;
+  border-radius: 5px;
+  font-family:'Barlow', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  font-weight: 500;
+  
+  
+}
+
+.resposta{
+  height:300px;
+  width: 200px;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px black solid;
+}
+
+
+
+/*.botao_graficos{
+  height: 30px;
+  width: 100px;
+  background-color: #F4EEA7;
+  border-radius: 5px;
+  font-family:'Barlow', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  font-weight: 500;
+  
+}*/
