@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(idAquario, limite_linhas) {
+function buscarUltimasMedidas(idUsuarioLugar, limite_linhas) {
     
     instrucaoSql = ''
     
@@ -14,14 +14,11 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
                     where fk_aquario = ${idAquario}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select 
-                        temperatura, 
-                        umidade, 
-                        momento,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
-                    from medida
-                    where fk_aquario = ${idAquario}
-                    order by id desc limit ${limite_linhas}`;
+        instrucaoSql = `select count(fk_lugar) as 'quantidade', nome_cidade as 'lugar'
+         from usuario_lugar as u 
+         join lugares_viajados as l 
+         on l.idLugar = u.fk_lugar
+        group by fk_lugar`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -31,7 +28,7 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idAquario) {
+function buscarMedidasEmTempoReal(idUsuarioLugar) {
     
     instrucaoSql = ''
     
@@ -44,12 +41,11 @@ function buscarMedidasEmTempoReal(idAquario) {
                     order by id desc`;
         
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select 
-                        temperatura, 
-                        umidade, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
-                        fk_aquario 
-                        from medida where fk_aquario = ${idAquario} 
-                    order by id desc limit 1`;
+        instrucaoSql = `select count(fk_lugar) as 'quantidade', nome_cidade as 'lugar' 
+        from usuario_lugar as u 
+        join lugares_viajados as l
+         on l.idLugar = u.fk_lugar
+        group by fk_lugar`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
