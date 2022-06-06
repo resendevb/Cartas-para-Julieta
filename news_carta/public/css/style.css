@@ -32,7 +32,7 @@ body {
 
 
 .navbar {
-  width: 300px;
+  width: 400px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -439,9 +439,6 @@ align-items: center;
   border-radius: 10px;
 }
 
-.lugares{
-  
-}
 
 .input_lugar{
   height: 15px;
@@ -494,12 +491,6 @@ button {
   
 }
 
-.banner .container .grafico2{
-  display: flex;
-  position: relative;
-  height: 200px;
-   width: 100px;
-}
 
 
 /* perfil do usuário */
@@ -564,7 +555,7 @@ button {
   
 }
 
-.resposta{
+.banner .container_perfil .resposta{
   height:300px;
   width: 200px;
   background-color: white;
@@ -573,14 +564,42 @@ button {
 }
 
 
+/* simulador */
 
-/*.botao_graficos{
-  height: 30px;
-  width: 100px;
+.banner_simulador .container_simulador {
+  height: 500px;
+  width: 100%;
   background-color: #F4EEA7;
-  border-radius: 5px;
-  font-family:'Barlow', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: black;
-  font-weight: 500;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   
-}*/
+}
+
+.simulador{
+  height: 300px;
+  width: 500px;
+  background-color: rgba(255,255,255, 0.5);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  border: #F4EEA7 2px solid;
+
+}
+
+.input_simulador{
+  height: 20px;
+  width: 50px;
+  background-color: rgba(240,230,140, 0.2);
+
+}
+
+.foto_hotel{
+  height: 300px;
+  width: 500px;
+  background-image: url(https://t-cf.bstatic.com/xdata/images/hotel/max1024x768/156347945.jpg?k=d01ee916a0c34e7da66d01748b0c755a74229a4b81057ea147c60df2c841a562&o=&hp=1);
+  background-size: cover;
+  border-radius: 15px;
+}

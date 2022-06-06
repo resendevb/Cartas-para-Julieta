@@ -12,6 +12,10 @@ function validarSessao() {
 
     select_input.value = fk_lugar;
 
+    var sexo = document.getElementById('grafico2');
+
+    select_sexo.value = sexo;
+
     var h1LoginUsuario = document.getElementById("h1_login_usuario");
 
     if (email != null && nome != null) {

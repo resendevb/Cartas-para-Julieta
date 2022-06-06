@@ -16,11 +16,12 @@
     
     <script src="./js/funcoes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="contar_lugares"></script>
+   
     <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    
 </head>
 
-<body onload="obterDadosGrafico()">
+<body onload="obterDadosGrafico()" onload=" obterDadosGrafico2()" >
     <div class="header"></div>
 
         <div class="container">
@@ -30,10 +31,11 @@
                 <li><a href="../public/index.html">Inicial</li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="simulador.html">Simulador</a></li>
                 <li class="agora">Gráficos</li>  
                 </ul>
     </div>
-    <li class="seta"><a href="../public/paginaDoUsuario.html">
+    <li class="seta"><a href="paginaDoUsuario.html">
         <img src="css/seta-para-a-esquerda.png"></a></li>
     
     <div class="banner">
@@ -44,7 +46,7 @@
               <canvas id="grafico1" class="grafico_1"></canvas>
             </div>
             <div class="div_chart2">
-              Sobre o filme
+              Público do site
               <canvas id="grafico2" class="grafico_2" ></canvas>
             </div>
                  
@@ -111,7 +113,34 @@ function obterDadosGrafico(idUsuarioLugar) {
 
 }
 
-// só altere aqui se souber o que está fazendo!
+ let proximaAtualizacao2;
+
+ window.onload = obterDadosGrafico2();
+
+ function obterDadosGrafico2(idUsuario) {
+     if (proximaAtualizacao2 != undefined) {
+         clearTimeout(proximaAtualizacao2);
+     }
+
+     fetch(`medidas/ultimas2/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+         if (response.ok) {
+             response.json().then(function (resposta) {
+                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                 resposta.reverse();
+
+                 plotarGrafico2(resposta);
+             });
+         } else {
+             console.error('Nenhum dado encontrado ou erro na API');
+         }
+     })
+         .catch(function (error) {
+             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+         });
+
+ }
+
+ //só altere aqui se souber o que está fazendo!
 function plotarGrafico(resposta, idUsuarioLugar) {
     console.log('iniciando plotagem do gráfico...');
 
@@ -120,7 +149,7 @@ function plotarGrafico(resposta, idUsuarioLugar) {
         datasets: [
             { 
                 label: 'Votos',
-                backgroundColor: '#F4EEA7',
+                backgroundColor: '#98FB98',
                 data: []
             },    
             
@@ -128,12 +157,15 @@ function plotarGrafico(resposta, idUsuarioLugar) {
     };
 
     for (i = 0; i < resposta.length; i++) {
-        var registro = resposta[i];
+        var registro = resposta[i]; 
         if(registro.lugar == "verona"){
-            dados.datasets[0].data.push(registro.quantidade);
+            dados.datasets[0].data.push(registro.quantidade) ;
         } else if(registro.lugar == "toscana"){
             dados.datasets[0].data.push(registro.quantidade);
+        } else if(registro.lugar == "verona e toscana"){
+            dados.datasets[0].data.push(registro.quantidade);
         }
+
         
         dados.labels.push(registro.lugar);
         
@@ -162,8 +194,7 @@ function plotarGrafico(resposta, idUsuarioLugar) {
                         id: 'y-temperatura',
                         ticks: {
                             beginAtZero: true,
-                            max: 100,
-                            min: 0
+                            
                         }
                     }, {
                         type: 'linear',
@@ -172,8 +203,6 @@ function plotarGrafico(resposta, idUsuarioLugar) {
                         id: 'y-umidade',
                         ticks: {
                             beginAtZero: true,
-                            max: 100,
-                            min: 0
                         },
 
                         gridLines: {
@@ -181,94 +210,168 @@ function plotarGrafico(resposta, idUsuarioLugar) {
                         },
                     }],
                 }
-            }
+      }});
+    }
 
-       // data: dados,
-        //Configurações do gráfico
-    //     options: {
-    //         responsive: true,
-    //         animation: { duration: 500 },
-    //         hoverMode: 'index',
-    //         stacked: false,
-    //         title: {
-    //             display: true,
-    //             text: 'Histórico recente de umidade/temperatura'
-    //         },
-    //         scales: {
-    //             yAxes: [{
-    //                 type: 'bar',
-    //                 display: true,
-    //                 position: 'left',
-    //                 id: 'verona',
-    //                 ticks: {
-    //                     beginAtZero: true,
-    //                     max: 100,
-    //                     min: 0
-    //                 }
-    //             }, {
-    //                 type: 'bar',
-    //                 display: false,
-    //                 position: 'right',
-    //                 id: 'toscana',
-    //                 ticks: {
-    //                     beginAtZero: true,
-    //                     max: 100,
-    //                     min: 0
-    //                 },
+          function plotarGrafico2(resposta) {
+     console.log('iniciando plotagem do gráfico...');
 
-    //                 gridLines: {
-    //                     drawOnChartArea: false,
-    //                 },
-    //             }],
-    //         }
-    //     }
-    });
+     var dados = {
+         labels: [],
+         datasets: [
+             { 
+                 label: 'Quantidade',
+                 backgroundColor: '#98FB98',
+                 data: []
+             },    
+            
+         ]
+     };
 
-    function sendData() {
-  var http = new XMLHttpRequest();
-  http.open('POST', 'http://localhost:3000/api/sendData', false);
-  http.send(null);
-}
-
-    setInterval(() => {
-  sendData();
-}, 2000);
-
-    //Atualiza os dados de 5 em 5 segundos
-  //  setTimeout(() => atualizarGrafico(idAquario, dados), 2000);
-}
-
-// só mexer se quiser alterar o tempo de atualização
-// ou se souber o que está fazendo!
-function atualizarGrafico(fk_lugar, dados) {
-
-    fetch(`/medidas/tempo-real/${fk_lugar}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (novoRegistro) {
-
-                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                console.log(`Dados atuais do gráfico: ${dados}`);
-
-                // tirando e colocando valores no gráfico
-                dados.labels.shift(); // apagar o primeiro
-                dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-                dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                dados.datasets[0].data.push(novoRegistro[0].verona); // incluir uma nova medida de umidade
-                dados.datasets[1].data.shift();  // apagar o primeiro de umidade
-                dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de umidade
-
-                window.grafico_linha.update();
-
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_lugar, dados), 2000);
-            }); 
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-            proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_lugar, dados), 2000);
+     for (i = 0; i < resposta.length; i++) {
+         var registro = resposta[i];
+         if(registro.sexo == "masculino"){
+            dados.datasets[0].data.push(registro.quantidade) ;
+        } else if(registro.sexo == "feminino"){
+            dados.datasets[0].data.push(registro.quantidade);
+        } else if(registro.sexo == "outro"){
+            dados.datasets[0].data.push(registro.quantidade);
         }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
+        dados.labels.push(registro.sexo);
+         } 
+        
+        
+        
+     
 
-}
+    //  console.log(JSON.stringify(dados));
+
+     var ctx = document.getElementById("grafico2").getContext('2d');
+     window.grafico_linha2 = Chart.Bar(ctx, {
+         data: dados,
+            // Configurações do gráfico
+             options: {
+                 responsive: true,
+                 animation: { duration: 500 },
+                 hoverMode: 'index',
+                 stacked: false,
+                 title: {
+                     display: true,
+                   
+                 },
+                 scales: {
+                     yAxes: [{
+                         type: 'linear',
+                         display: true,
+                         position: 'left',
+                         id: 'y-temperatura',
+                         ticks: {
+                             beginAtZero: true,
+                             
+                         }
+                     }, {
+                         type: 'linear',
+                         display: false,
+                         position: 'right',
+                         id: 'y-umidade',
+                         ticks: {
+                             beginAtZero: true,
+                            
+                         },
+
+                         gridLines: {
+                             drawOnChartArea: false,
+                         },
+                     }],
+                 }
+             }});}
+            
+      // data: dados,
+      // Configurações do gráfico
+        //  options: {
+        //      responsive: true,
+        //      animation: { duration: 500 },
+        //      hoverMode: 'index',
+        //      stacked: false,
+        //      title: {
+        //          display: true,
+        //          text: 'Histórico recente de umidade/temperatura'
+        //      },
+        //      scales: {
+        //          yAxes: [{
+        //              type: 'bar',
+        //              display: true,
+        //              position: 'left',
+        //              id: 'verona',
+        //              ticks: {
+        //                  beginAtZero: true,
+        //                  max: 100,
+        //                  min: 0
+        //              }
+        //          }, {
+        //              type: 'bar',
+        //              display: false,
+        //              position: 'right',
+        //              id: 'toscana',
+        //              ticks: {
+        //                  beginAtZero: true,
+        //                  max: 100,
+        //                  min: 0
+        //              },
+
+        //              gridLines: {
+        //                  drawOnChartArea: false,
+        //              },
+        //          }],
+        //      }
+        //  }
+        // }
+
+//      function sendData() {
+//    var http = new XMLHttpRequest();
+//    http.open('POST', 'http://localhost:3000/api/sendData', false);
+//    http.send(null);
+//  }
+
+//      setInterval(() => {
+//    sendData();
+//  }, 2000);
+
+//     //Atualiza os dados de 5 em 5 segundos
+//     setTimeout(() => atualizarGrafico(idAquario, dados), 2000);
+// }
+
+// // só mexer se quiser alterar o tempo de atualização
+// // ou se souber o que está fazendo!
+// // function atualizarGrafico(fk_lugar, dados) {
+
+//      fetch(`/medidas/tempo-real/${fk_lugar}`, { cache: 'no-store' }).then(function (response) {
+//          if (response.ok) {
+//              response.json().then(function (novoRegistro) {
+
+//                  console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+//                  console.log(`Dados atuais do gráfico: ${dados}`);
+
+//                  // tirando e colocando valores no gráfico
+//                  dados.labels.shift(); // apagar o primeiro
+//                  dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+//                  dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+//                  dados.datasets[0].data.push(novoRegistro[0].verona); // incluir uma nova medida de umidade
+//                  dados.datasets[1].data.shift();  // apagar o primeiro de umidade
+//                  dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de umidade
+
+//                  window.grafico_linha.update();
+
+//                  proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_lugar, dados), 2000);
+//              }); 
+//          } else {
+//              console.error('Nenhum dado encontrado ou erro na API');
+//              proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_lugar, dados), 2000);
+//          }
+//      })
+//          .catch(function (error) {
+//              console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+//          });
+        //   }
+ 
 </script>

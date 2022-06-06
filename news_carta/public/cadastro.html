@@ -25,6 +25,7 @@
                 <li><a href="index.html"> Inicial</li>
                 <li><a href="login.html">Login</a></li>
                 <li class="agora">Cadastro</li>
+                <li><a href="simulador.html">Simulador</a></li>
             </ul>
             
     </div>
@@ -38,13 +39,19 @@
                 <input id="email_input" class="input_email" type="email" placeholder="E-mail"><br>
                 <input id="senha_input" class="input_senha" type="password" placeholder="********"><br>
                 
+                <select id="select_sexo">
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="outro">outro</option>
+                </select><br>
                 
-                Já conhece ou deseja conhecer 
+                <b>Já conhece ou deseja conhecer </b>
                 <div class="lugares">
                 <select id="select_lugar">
                     <option value="1">Verona</option>
                     <option value="2">Toscana</option>
-                </select>
+                    <option value="3">Verona e Toscana</option>
+                </select><br>
                 </div><br>
                 <button onclick="cadastrar()">Cadastrar</button>
             </div>
@@ -82,6 +89,7 @@
 
         var lugarVar = select_lugar.value
         
+        var sexoVar= select_sexo.value
         
 
         if (nomeVar == ""){
@@ -123,7 +131,8 @@
                 nomeServer : nomeVar,
                 emailServer : emailVar,
                 senhaServer : senhaVar,
-                lugarServer : lugarVar
+                lugarServer : lugarVar,
+                sexoServer : sexoVar
                 
 
             })

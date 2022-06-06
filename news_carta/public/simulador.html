@@ -22,38 +22,39 @@
 
         <div class="container">
             <ul class="navbar">
-                <li><a href="index.html"> Inicial</li>
+                <li><a href="index.html">Inicial</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="cadastro.html">Cadastro</a></li>
-                <li><a href="simulador.html">Simulador</a></li>
-                <li><a href="dashboard.html">Gráficos</a></li>
-
-                
+                <li class="agora">Simulador</li>
             </ul>
             
         
     </div>
 
-    <div class="banner">
-        <div class="container_perfil">
-
+    <div class="banner_simulador">
+        <div class="container_simulador">
            
-            <div class="ameis">
-               <h4> Cadastre seus personagens favoritos</h4>
-                <br><br>
-                <input id="input_amei" class="amei_input">
-                <br>
-                <button id="botao_like" onclick="like()">Cadastrar</button>
+            <div class="simulador">
+                <h4>Calcule o valor da sua estada no melhor hotel de Verona</h4><br>
+               <b> Número de dias </b><input id="input_numero_dias" class="input_simulador"><br>
+               <button onclick="calcular()">calcular</button><br>
+               <div id="div_resultado"></div>
             </div>
 
-            <div id="div_resultado" class="resposta"></div>
-            
+            <div class="foto_hotel">
+
             </div>
-           
+                
+
+              
+            </div>
         </div>
-       
+    
     
 
+    
+        
+  
 
 <br> 
 <br>
@@ -69,19 +70,14 @@
     </div>
     <!--footer fim-->
 </body>
+
 </html>
 <script>
-    var lista_personagens_preferidos = []
-    
-    function like(){
-        var personagem = input_amei.value
-       lista_personagens_preferidos.push(personagem)
+    function calcular(){
+        var numero_dias = Number(input_numero_dias.value)
 
-       div_resultado.innerHTML =""
-        for(var contador=0; contador < lista_personagens_preferidos.length; contador++)
-        {div_resultado.innerHTML += `<b>${lista_personagens_preferidos[contador]}</b><br>`}
-        
+        var total = numero_dias * 2935
+
+        div_resultado.innerHTML = `<b>Você irá pagar R$ ${total},00 pela estada de duas pessoas <br> no Due Torri Hotel </b>`
     }
-
-    
 </script>

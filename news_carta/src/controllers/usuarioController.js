@@ -66,6 +66,7 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var lugar = req.body.lugarServer;
+    var sexo = req.body.sexoServer;
     
 
     // Faça as validações dos valores
@@ -77,10 +78,12 @@ function cadastrar(req, res) {
         res.status(400).send("Sua senha está undefined!");
     } else if (lugar == undefined) {
         res.status(400).send("Seu lugar está undefined!");
+    } else if (sexo == undefined) {
+        res.status(400).send("Seu sexo está undefined!");
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha, lugar)
+        usuarioModel.cadastrar(nome, email, senha, lugar, sexo)
             .then(
                 function (resultado) {
                     res.json(resultado);
