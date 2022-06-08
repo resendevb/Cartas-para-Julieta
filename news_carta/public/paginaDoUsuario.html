@@ -43,7 +43,8 @@
                 <br><br>
                 <input id="input_amei" class="amei_input">
                 <br>
-                <button id="botao_like" onclick="like()">Cadastrar</button>
+                <button id="botao_like" onclick="cadastrar()">Cadastrar</button><br>
+                <button onclick="exibir()">Exibir</button>
             </div>
 
             <div id="div_resultado" class="resposta"></div>
@@ -73,14 +74,19 @@
 <script>
     var lista_personagens_preferidos = []
     
-    function like(){
+    function cadastrar(){
         var personagem = input_amei.value
        lista_personagens_preferidos.push(personagem)
 
-       div_resultado.innerHTML =""
+       
         for(var contador=0; contador < lista_personagens_preferidos.length; contador++)
-        {div_resultado.innerHTML += `<b>${lista_personagens_preferidos[contador]}</b><br>`}
+        {}
         
+    }
+
+    function exibir(){
+        for(var contador = 0; contador < lista_personagens_preferidos.length; contador++){
+        div_resultado.innerHTML += `<b>${lista_personagens_preferidos[contador]}</b><br>`}
     }
 
     
