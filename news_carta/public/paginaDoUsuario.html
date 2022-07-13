@@ -10,7 +10,7 @@
 
     <script src="./js/funcoes.js"></script>
 
-    <link rel="icon" href="./assets/icon/favicon.ico">
+    <link rel="icon" href="css/icon/favicon.ico"> 
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     
@@ -39,15 +39,24 @@
 
            
             <div class="ameis">
-               <h4> Cadastre seus personagens favoritos</h4>
+               <h4> Cadastre seus personagens favoritos</h4><br>
+
+               
+               
                 <br><br>
                 <input id="input_amei" class="amei_input">
                 <br>
                 <button id="botao_like" onclick="cadastrar()">Cadastrar</button><br>
-                <button onclick="exibir()">Exibir</button>
+                <button onclick="exibir()">Ver</button>
             </div>
 
-            <div id="div_resultado" class="resposta"></div>
+            <div id="div_resultado" class="resposta">
+               
+                <div class="hello">
+                    <b> Olá,<br> <span id="b_usuario"> usuário</span>
+                    </b>
+                </div>
+            </div>
             
             </div>
            
@@ -72,6 +81,10 @@
 </body>
 </html>
 <script>
+
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO; 
+    
+
     var lista_personagens_preferidos = []
     
     function cadastrar(){

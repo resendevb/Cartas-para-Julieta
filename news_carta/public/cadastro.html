@@ -9,8 +9,8 @@
     <title>Cartas para Julieta</title>
 
     
-
-    <link rel="icon" href="./assets/icon/favicon.ico">
+    <link rel="icon" href="css/icon/favicon.ico"> 
+    
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
    
@@ -53,7 +53,11 @@
                     <option value="3">Verona e Toscana</option>
                 </select><br>
                 </div><br>
-                <button onclick="cadastrar()">Cadastrar</button>
+                <button onclick="cadastrar()">Cadastrar</button> <br>
+                <div id="div_carregando" class="carregando">
+                    <img src="css/loading-yellow.gif">
+                </div>
+                </div>
             </div>
         </div>
     </div>
@@ -115,7 +119,10 @@
             return false;
         }
         else {
-            window.location = "login.html";
+            div_carregando.style.display ="block";
+            setTimeout(() => {
+                window.location.href="./login.html"
+            }, 2000);
         }
 
 
@@ -141,7 +148,7 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                cardErro.style.display = "block";
+                div_carregando.style.display = "block";
 
                 mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 

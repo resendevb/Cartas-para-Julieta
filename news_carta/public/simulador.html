@@ -9,10 +9,13 @@
     <title>Cartas para Julieta</title>
 
     <script src="./js/funcoes.js"></script>
+    <script src="js/carrossel.js" defer></script>
 
-    <link rel="icon" href="./assets/icon/favicon.ico">
+
+    <link rel="icon" href="css/icon/favicon.ico"> 
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="js/carrossel.css">
     
     <script src="./js/funcoes.js"></script>
 </head>
@@ -41,9 +44,13 @@
                <div id="div_resultado"></div>
             </div>
 
-            <div class="foto_hotel">
-
-            </div>
+            <div class="carrossel">
+            <div class="foto_hotel" id="img">
+                <img src="css/due-hotel1.jpg" alt="">
+                <img src="css/due-hotel2.jpg" alt="">
+                <img src="css/due-hotel3.jpg" alt="">
+                <img src="css/due-hotel44.jpg" alt="">
+            </div> </div>
                 
 
               
@@ -73,6 +80,7 @@
 
 </html>
 <script>
+
     function calcular(){
         var numero_dias = Number(input_numero_dias.value)
 
@@ -80,4 +88,6 @@
 
         div_resultado.innerHTML = `<b>Você irá pagar R$ ${total},00 pela estada de duas pessoas <br> no Due Torri Hotel </b>`
     }
+
+
 </script>

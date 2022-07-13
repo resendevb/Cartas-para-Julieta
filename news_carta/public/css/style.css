@@ -455,7 +455,20 @@ button {
   font-family:'Barlow', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: black;
   font-weight: 500;
+  cursor: pointer;
 }
+
+.carregando {
+  width: 50px;
+  margin: auto;
+  display: none;
+}
+
+.carregando img {
+  height: 50px;
+  width: 50px;
+}
+
 
 
 /* PAGINA DOS GRÁFICOS */
@@ -561,6 +574,28 @@ button {
   background-color: white;
   border-radius: 10px;
   border: 2px black solid;
+  display: flex;
+  flex-direction: column;
+}
+
+.hello {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border:#212124 2px solid;
+  font-size: 15px;
+}
+
+.hello b {
+  color: #e3b062;
+  
+  
+}
+
+.hello b span {
+  font-size: 15px;
+   
 }
 
 
@@ -587,6 +622,8 @@ button {
   border-radius: 15px;
   border: #F4EEA7 2px solid;
 
+  margin: 0;
+
 }
 
 .input_simulador{
@@ -596,10 +633,5 @@ button {
 
 }
 
-.foto_hotel{
-  height: 300px;
-  width: 500px;
-  background-image: url(https://t-cf.bstatic.com/xdata/images/hotel/max1024x768/156347945.jpg?k=d01ee916a0c34e7da66d01748b0c755a74229a4b81057ea147c60df2c841a562&o=&hp=1);
-  background-size: cover;
-  border-radius: 15px;
-}
+
+

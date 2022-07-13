@@ -20,10 +20,14 @@ function validarSessao() {
 
     if (email != null && nome != null) {
         // window.alert(`Seja bem-vindo, ${nome}!`);
-        if (h1LoginUsuario != undefined) {
-            h1LoginUsuario.innerHTML = email;
+
+        if (email != null && nome != null) {
+            // window.alert(`Seja bem-vindo, ${nome}!`);
+            if (h1LoginUsuario != undefined) {
+                h1LoginUsuario.innerHTML = email;
+            }
+            b_usuario.innerHTML = nome;
         }
-        b_usuario.innerHTML = nome;
 
         // finalizarAguardar();
     } else {

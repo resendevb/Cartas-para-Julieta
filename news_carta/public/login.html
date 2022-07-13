@@ -10,7 +10,7 @@
 
     <script src="./js/funcoes.js"></script>
 
-    <link rel="icon" href="./assets/icon/favicon.ico">
+    <link rel="icon" href="css/icon/favicon.ico"> 
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
    
@@ -40,6 +40,9 @@
                 <input id="senha_input" class="input_senha" type="password" placeholder="********"><br>
 
                <button onclick="entrar()">Entrar</button> 
+               <div id="div_carregando" class="carregando">
+                <img src="css/loading-yellow.gif">
+            </div>
                
                <!-- colocar no js window.location.href = "NOMEdaPagina.html" -->
 
@@ -84,7 +87,10 @@
             return false;
         }
         else {
-            window.location = "paginaDoUsuario.html";
+            div_carregando.style.display ="block";
+            setTimeout(() => {
+                window.location.href="./paginaDoUsuario.html"
+            }, 2000);
         }
 
         fetch("/usuarios/cadastrar", {
@@ -104,17 +110,29 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                cardErro.style.display = "block";
+                console.log(resposta);
 
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
 
-                setTimeout(() => {
-                    window.location = "paginaDoUsuario.html";
-                }, "2000")
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/areaLogada.html";
+                    }, 1000); // apenas para exibir o loading
+
+                })
                 
                 
             } else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
